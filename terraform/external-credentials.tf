@@ -12,8 +12,21 @@ module "iam_user" {
 
 data "aws_iam_policy_document" "snapshotter_user_policy" {
   statement {
+    sid       = "AllowGetResourceIDs"
     actions   = ["apigateway:GET"]
     resources = ["${aws_api_gateway_rest_api.snapshots.arn}/resources"]
+  }
+
+  statement {
+    sid       = "AllowUpdateLinks"
+    actions   = ["apigateway:PATCH"]
+    resources = ["${aws_api_gateway_rest_api.snapshots.arn}/resources/*/methods/GET/integration/responses/*"]
+  }
+
+  statement {
+    sid       = "AllowAPIGWDeploy"
+    actions   = ["apigateway:POST"]
+    resources = ["${aws_api_gateway_rest_api.snapshots.arn}/deployments"]
   }
 }
 
