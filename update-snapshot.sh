@@ -66,9 +66,9 @@ rhash -MH "$POCKET_SNAPSHOT_PATH"* | sudo tee "$POCKET_SNAPSHOT_HASHES_PATH"
 # upload tar, tar.gz
 
 echo "Uploading $POCKET_SNAPSHOT_PATH to sj://pocket-public-blockchains/$datetime_tar_name"
-uplink cp --access "$UPLINK_WRITE" "$POCKET_SNAPSHOT_PATH" "sj://pocket-public-blockchains/$datetime_tar_name" --parallelism=5 --progress=false
+uplink cp --access "$UPLINK_WRITE" "$POCKET_SNAPSHOT_PATH" "sj://pocket-public-blockchains/$datetime_tar_name" --parallelism=5 --progress=false --expires="+168h"
 echo "Uploading $POCKET_SNAPSHOT_PATH to sj://pocket-public-blockchains/$datetime_tar_name.gz"
-uplink cp --access "$UPLINK_WRITE" "${POCKET_SNAPSHOT_PATH}.gz" "sj://pocket-public-blockchains/$datetime_tar_name.gz" --parallelism=5 --progress=false
+uplink cp --access "$UPLINK_WRITE" "${POCKET_SNAPSHOT_PATH}.gz" "sj://pocket-public-blockchains/$datetime_tar_name.gz" --parallelism=5 --progress=false --expires="+168h"
 
 # get sharable links
 tar_link=$(uplink share --url --access "$UPLINK_WRITE" "sj://pocket-public-blockchains/$datetime_tar_name" |  grep "URL  " | awk  '{print $3}')
