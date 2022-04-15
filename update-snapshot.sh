@@ -78,6 +78,7 @@ echo "New sharable links generated: $tar_link, $tgz_link"
 # update API gateway mock integrations
 # latest tar
 aws apigateway update-integration-response --rest-api-id "$API_GATEWAY_ID" --resource-id "$API_GATEWAY_LATEST_RESOURCE_ID" --http-method GET --status-code 302 --patch-operations op='replace',path='/responseParameters/method.response.header.location',value='"'"'${tar_link}?download=1'"'"' op='replace',path='/responseTemplates/text~1plain',value=\'"Redirecting to ${tar_link}?download=1"\'
+aws apigateway update-integration-response --rest-api-id "$API_GATEWAY_ID" --resource-id "$API_GATEWAY_LATEST_RESOURCE_ID" --http-method HEAD --status-code 302 --patch-operations op='replace',path='/responseParameters/method.response.header.location',value='"'"'${tar_link}?download=1'"'"' op='replace',path='/responseTemplates/text~1plain',value=\'"Redirecting to ${tar_link}?download=1"\'
 # latest tar md5
 aws apigateway update-integration-response --rest-api-id "$API_GATEWAY_ID" --resource-id "$API_GATEWAY_LATEST_MD5_RESOURCE_ID" --http-method GET --status-code 200 --patch-operations op='replace',path='/responseTemplates/text~1plain',value=\'$(cat /data/pocket-data-snapshot-hashes.txt | grep '.tar ' | awk '{print $2}')\'
 # latest tar sha1
@@ -85,6 +86,7 @@ aws apigateway update-integration-response --rest-api-id "$API_GATEWAY_ID" --res
 
 # latest tar.gz
 aws apigateway update-integration-response --rest-api-id "$API_GATEWAY_ID" --resource-id "$API_GATEWAY_LATEST_GZ_RESOURCE_ID" --http-method GET --status-code 302 --patch-operations op='replace',path='/responseParameters/method.response.header.location',value='"'"'${tgz_link}?download=1'"'"' op='replace',path='/responseTemplates/text~1plain',value=\'"Redirecting to ${tgz_link}?download=1"\'
+aws apigateway update-integration-response --rest-api-id "$API_GATEWAY_ID" --resource-id "$API_GATEWAY_LATEST_GZ_RESOURCE_ID" --http-method HEAD --status-code 302 --patch-operations op='replace',path='/responseParameters/method.response.header.location',value='"'"'${tgz_link}?download=1'"'"' op='replace',path='/responseTemplates/text~1plain',value=\'"Redirecting to ${tgz_link}?download=1"\'
 # latest tar.gz md5
 aws apigateway update-integration-response --rest-api-id "$API_GATEWAY_ID" --resource-id "$API_GATEWAY_LATEST_GZ_MD5_RESOURCE_ID" --http-method GET --status-code 200 --patch-operations op='replace',path='/responseTemplates/text~1plain',value=\'$(cat /data/pocket-data-snapshot-hashes.txt | grep '.tar.gz ' | awk '{print $2}')\'
 # latest tar.gz sha1

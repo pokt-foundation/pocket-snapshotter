@@ -13,10 +13,32 @@ resource "aws_api_gateway_method" "latest_tar" {
   authorization = "NONE"
 }
 
+resource "aws_api_gateway_method" "latest_tar_head" {
+  rest_api_id   = aws_api_gateway_rest_api.snapshots.id
+  resource_id   = aws_api_gateway_resource.latest_tar.id
+  http_method   = "HEAD"
+  authorization = "NONE"
+}
+
 resource "aws_api_gateway_integration" "latest_tar" {
   rest_api_id = aws_api_gateway_rest_api.snapshots.id
   resource_id = aws_api_gateway_method.latest_tar.resource_id
   http_method = aws_api_gateway_method.latest_tar.http_method
+  type        = "MOCK"
+
+  request_templates = {
+    "application/json" = <<EOF
+{
+   "statusCode": 302
+}
+EOF
+  }
+}
+
+resource "aws_api_gateway_integration" "latest_tar_head" {
+  rest_api_id = aws_api_gateway_rest_api.snapshots.id
+  resource_id = aws_api_gateway_method.latest_tar_head.resource_id
+  http_method = aws_api_gateway_method.latest_tar_head.http_method
   type        = "MOCK"
 
   request_templates = {
@@ -37,11 +59,41 @@ resource "aws_api_gateway_method_response" "latest_tar_302" {
   response_parameters = { "method.response.header.location" = true }
 }
 
+resource "aws_api_gateway_method_response" "latest_tar_302_head" {
+  rest_api_id = aws_api_gateway_rest_api.snapshots.id
+  resource_id = aws_api_gateway_method.latest_tar_head.resource_id
+  http_method = aws_api_gateway_method.latest_tar_head.http_method
+  status_code = "302"
+
+  response_parameters = { "method.response.header.location" = true }
+}
+
 resource "aws_api_gateway_integration_response" "latest_tar_302" {
   rest_api_id = aws_api_gateway_rest_api.snapshots.id
   resource_id = aws_api_gateway_method.latest_tar.resource_id
   http_method = aws_api_gateway_method.latest_tar.http_method
   status_code = aws_api_gateway_method_response.latest_tar_302.status_code
+
+  response_parameters = { "method.response.header.location" = "'https://pokt.network'" }
+
+  response_templates = {
+    "text/plain" = "Provisioned with terraform, this response should be replaced with the script."
+  }
+
+  lifecycle {
+    # We don't want terraform to change the value back just because the script has changed the response - meaning TF state is not in sync with AWS.
+    ignore_changes = [
+      response_parameters,
+      response_templates
+    ]
+  }
+}
+
+resource "aws_api_gateway_integration_response" "latest_tar_302_head" {
+  rest_api_id = aws_api_gateway_rest_api.snapshots.id
+  resource_id = aws_api_gateway_method.latest_tar_head.resource_id
+  http_method = aws_api_gateway_method.latest_tar_head.http_method
+  status_code = aws_api_gateway_method_response.latest_tar_302_head.status_code
 
   response_parameters = { "method.response.header.location" = "'https://pokt.network'" }
 
@@ -186,6 +238,13 @@ resource "aws_api_gateway_method" "latest_tar_gz" {
   authorization = "NONE"
 }
 
+resource "aws_api_gateway_method" "latest_tar_gz_head" {
+  rest_api_id   = aws_api_gateway_rest_api.snapshots.id
+  resource_id   = aws_api_gateway_resource.latest_tar_gz.id
+  http_method   = "HEAD"
+  authorization = "NONE"
+}
+
 resource "aws_api_gateway_integration" "latest_tar_gz" {
   rest_api_id = aws_api_gateway_rest_api.snapshots.id
   resource_id = aws_api_gateway_method.latest_tar_gz.resource_id
@@ -201,6 +260,20 @@ EOF
   }
 }
 
+resource "aws_api_gateway_integration" "latest_tar_gz_head" {
+  rest_api_id = aws_api_gateway_rest_api.snapshots.id
+  resource_id = aws_api_gateway_method.latest_tar_gz_head.resource_id
+  http_method = aws_api_gateway_method.latest_tar_gz_head.http_method
+  type        = "MOCK"
+
+  request_templates = {
+    "application/json" = <<EOF
+{
+   "statusCode": 302
+}
+EOF
+  }
+}
 
 resource "aws_api_gateway_method_response" "latest_tar_gz_302" {
   rest_api_id = aws_api_gateway_rest_api.snapshots.id
@@ -211,11 +284,41 @@ resource "aws_api_gateway_method_response" "latest_tar_gz_302" {
   response_parameters = { "method.response.header.location" = true }
 }
 
+resource "aws_api_gateway_method_response" "latest_tar_gz_302_head" {
+  rest_api_id = aws_api_gateway_rest_api.snapshots.id
+  resource_id = aws_api_gateway_method.latest_tar_gz_head.resource_id
+  http_method = aws_api_gateway_method.latest_tar_gz_head.http_method
+  status_code = "302"
+
+  response_parameters = { "method.response.header.location" = true }
+}
+
 resource "aws_api_gateway_integration_response" "latest_tar_gz_302" {
   rest_api_id = aws_api_gateway_rest_api.snapshots.id
   resource_id = aws_api_gateway_method.latest_tar_gz.resource_id
   http_method = aws_api_gateway_method.latest_tar_gz.http_method
   status_code = aws_api_gateway_method_response.latest_tar_gz_302.status_code
+
+  response_parameters = { "method.response.header.location" = "'https://pokt.network'" }
+
+  response_templates = {
+    "text/plain" = "Provisioned with terraform, this response should be replaced with the script."
+  }
+
+  lifecycle {
+    # We don't want terraform to change the value back just because the script has changed the response - meaning TF state is not in sync with AWS.
+    ignore_changes = [
+      response_parameters,
+      response_templates
+    ]
+  }
+}
+
+resource "aws_api_gateway_integration_response" "latest_tar_gz_302_head" {
+  rest_api_id = aws_api_gateway_rest_api.snapshots.id
+  resource_id = aws_api_gateway_method.latest_tar_gz_head.resource_id
+  http_method = aws_api_gateway_method.latest_tar_gz_head.http_method
+  status_code = aws_api_gateway_method_response.latest_tar_gz_302_head.status_code
 
   response_parameters = { "method.response.header.location" = "'https://pokt.network'" }
 
