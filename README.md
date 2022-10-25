@@ -8,6 +8,13 @@ If you're looking for Pocket native blockchain data snapshots, they are provided
 
 The links are redirects, so if you're using `curl` make sure to add an argument to follow the redirect: `curl -L https://snapshot.nodes.pokt.network/latest.tar > ~/destination.tar`
 
+#### Utilizing uplink CLI to download snapshots
+
+Chances are you'll get better speeds utilizing uplink CLI to download the snapshot. We provide an access key that has necessary permissions. Here is an example that downloads the latest snapshot:
+
+```
+uplink cp --access=147A7s3UVY6g4DhxdatsM7QMofNBJJfvcq5w9XuYjU2HrmEbr4JSbRy3NQu3mijqk7T8in1PYEAdcf11dd5yhJ4eDAn4UMppBgqcN49f2tHVcGhRV2McpvyTm4U22uXH35h14JA1YXiGdUFDss7ThTnFnPYY8uRTxmtG2UrdW9LZkmuJysNF1sU8anEGcZnGQuYWViAzVx2VwtYTrYQE5CXPQotB2rnGwFaUY9vVeTCKFC8yiwZLHxhPJdZaexrZPbBTaf1xvmuyarMchkxvbn8K7pLXfw7n2xGArJavvRK86Nj1SrRr5ws9ku9i24WbGddKWz4SNaZgUH63Wm65yK8m91kgeHLDhhhR sj://pocket-public-blockchains/$(curl -s https://snapshot.nodes.pokt.network/latest.tar.gz | rev | cut -d'/' -f1|rev|cut -d'?' -f1) ./destination.tar.gz
+```
 
 ## Purpose
 The script stops a pocket node container, creates the snapshot, turns on the node back, uploads the archive to StorJ, updates the permament link to point to the latest snapshot.
