@@ -13,7 +13,7 @@ The links are redirects, so if you're using `curl` make sure to add an argument 
 Chances are you'll get better speeds utilizing [uplink CLI](https://docs.storj.io/dcs/downloads/download-uplink-cli/) to download the snapshot. We provide an access key that has necessary permissions. Here is an example that downloads the latest snapshot:
 
 ```
-uplink cp --access=147A7s3UVY6g4DhxdatsM7QMofNBJJfvcq5w9XuYjU2HrmEbr4JSbRy3NQu3mijqk7T8in1PYEAdcf11dd5yhJ4eDAn4UMppBgqcN49f2tHVcGhRV2McpvyTm4U22uXH35h14JA1YXiGdUFDss7ThTnFnPYY8uRTxmtG2UrdW9LZkmuJysNF1sU8anEGcZnGQuYWViAzVx2VwtYTrYQE5CXPQotB2rnGwFaUY9vVeTCKFC8yiwZLHxhPJdZaexrZPbBTaf1xvmuyarMchkxvbn8K7pLXfw7n2xGArJavvRK86Nj1SrRr5ws9ku9i24WbGddKWz4SNaZgUH63Wm65yK8m91kgeHLDhhhR sj://pocket-public-blockchains/$(curl -s https://snapshot.nodes.pokt.network/latest.tar.gz | rev | cut -d'/' -f1|rev|cut -d'?' -f1) ./destination.tar.gz
+uplink cp --access=1mg7uwv6EQNyvgCxAuXBb19BZAMne2T5Qkzc5LsahbpERiXviMvENvBKN5yTf85BRRBcetZ4NWaiBri9UyvVHFBN4vaaLTRJ5AJnWfThvqkS18ftS4hyZLJ1AGaoJpdVUp6uS7zsoHXr5E22J1cN5mj2kchajtNKK7fRB6Jq5Q6cmDd5aFS1n8y9AbG6RjJFpAcdXTssmDqqYmYcTfUs89C2SBBCHTvUyScLA3hUtFLa1Cp16okDZUzwh4miPgPjr5JboR3DJby15TAvKmFttNf9Vya5sTTtya6KnrAqtwTkbPE16Eo6VjtoWwbvgT3S2FmQw3h6LNzrT3QbXaiXzK18B49S5UXSH3RbXT2xvgTFA6pbv sj://pocket-public-blockchains-main/v0-snapshots/$(curl -s https://snapshot.nodes.pokt.network/latest.tar.gz | rev | cut -d'/' -f1|rev|cut -d'?' -f1) ./destination.tar.gz
 ```
 
 ## Purpose
