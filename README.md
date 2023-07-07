@@ -1,5 +1,11 @@
 # pocket-snapshotter
 
+# ⚠️ DEPRECATED ⚠️
+
+Please follow the instructions in [this document](https://github.com/pokt-network/pocket-core/blob/staging/doc/guides/snapshot.md) instead.
+
+
+
 ## Public snapshots
 
 If you're looking for Pocket native blockchain data snapshots, they are provided by Pocket Foundation and available via the following links:
